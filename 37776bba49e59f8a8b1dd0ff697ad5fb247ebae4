@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f84747f_0c003c72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000697
+      },
+      "writtenOn": "2022-07-30T08:34:12Z",
+      "side": 1,
+      "message": "Enabling LTO_CLANG fulfils the requirements of THINLTO to be enabled as you can in arch/Kconfig#506.\nSo need to add\n# CONFIG_THINLTO is not set\nto enable full LTO",
+      "revId": "37776bba49e59f8a8b1dd0ff697ad5fb247ebae4",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad"
+    }
+  ]
+}
