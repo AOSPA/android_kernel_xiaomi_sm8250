@@ -70,6 +70,7 @@ enum {
 	HW_PLATFORM_K81 = 46,
 	HW_PLATFORM_K81A = 47,
 	HW_PLATFORM_L3A = 48,
+	HW_PLATFORM_L11R = 50,
 	HW_PLATFORM_HDK = 31,
 	HW_PLATFORM_IDP = 34,
 	HW_PLATFORM_INVALID
@@ -102,6 +103,7 @@ const char *hw_platform[] = {
 	[HW_PLATFORM_K81] = "ENUMA",
 	[HW_PLATFORM_K81A] = "ELISH",
 	[HW_PLATFORM_L3A] = "PSYCHE",
+	[HW_PLATFORM_L11R] = "MUNCH",
 #ifdef CONFIG_BOARD_XIAOMI_SM7250
 	[HW_PLATFORM_J9A] = "VANGOGH",
 	[HW_PLATFORM_G7A] = "PICASSO",
@@ -378,6 +380,9 @@ static struct msm_soc_info cpu_of_id[] = {
 
 	/* Khajeq ID */
 	[562] = {MSM_CPU_KHAJEQ, "KHAJEQ"},
+
+	/* Khajeg ID */
+	[585] = {MSM_CPU_KHAJEG, "KAHJEG"},
 
 	/* Lagoon ID */
 	[434] = {MSM_CPU_LAGOON, "LAGOON"},
@@ -1317,6 +1322,10 @@ static void * __init setup_dummy_socinfo(void)
 		dummy_socinfo.id = 562;
 		strlcpy(dummy_socinfo.build_id, "khajeq - ",
 		sizeof(dummy_socinfo.build_id));
+	} else if (early_machine_is_khajeg()) {
+		dummy_socinfo.id = 585;
+		strlcpy(dummy_socinfo.build_id, "khajeg - ",
+		sizeof(dummy_socinfo.build_id));
 	} else if (early_machine_is_bengalp()) {
 		dummy_socinfo.id = 445;
 		strlcpy(dummy_socinfo.build_id, "bengalp - ",
@@ -1785,6 +1794,8 @@ uint32_t get_hw_version_platform(void)
 		return HARDWARE_PLATFORM_ELISH;
         else if (hw_type == HW_PLATFORM_L3A)
                 return HARDWARE_PLATFORM_PSYCHE;
+	else if (hw_type == HW_PLATFORM_L11R)
+		return HARDWARE_PLATFORM_MUNCH;
 #ifdef CONFIG_BOARD_XIAOMI_SM7250
 	else if (hw_type == HW_PLATFORM_J9A)
 		return HARDWARE_PLATFORM_VANGOGH;

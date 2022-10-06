@@ -49,6 +49,7 @@ static int gc_thread_func(void *data)
 	bool boost;
 	struct f2fs_gc_control gc_control = {
 		.victim_segno = NULL_SEGNO,
+		.should_migrate_blocks = false,
 		.err_gc_skipped = false };
 
 	wait_ms = gc_th->min_sleep_time;
@@ -110,14 +111,10 @@ static int gc_thread_func(void *data)
 		 */
 		if (sbi->gc_mode == GC_URGENT_HIGH) {
 			spin_lock(&sbi->gc_urgent_high_lock);
-			if (sbi->gc_urgent_high_limited) {
-				if (!sbi->gc_urgent_high_remaining) {
-					sbi->gc_urgent_high_limited = false;
-					spin_unlock(&sbi->gc_urgent_high_lock);
-					sbi->gc_mode = GC_NORMAL;
-					continue;
-				}
+			if (sbi->gc_urgent_high_remaining) {
 				sbi->gc_urgent_high_remaining--;
+				if (!sbi->gc_urgent_high_remaining)
+					sbi->gc_mode = GC_NORMAL;
 			}
 			spin_unlock(&sbi->gc_urgent_high_lock);
 		}
@@ -126,10 +123,7 @@ static int gc_thread_func(void *data)
 				sbi->gc_mode == GC_URGENT_MID) {
 			wait_ms = gc_th->urgent_sleep_time;
 			f2fs_down_write(&sbi->gc_lock);
-			gc_control.should_migrate_blocks = true;
 			goto do_gc;
-		} else {
-			gc_control.should_migrate_blocks = false;
 		}
 
 		if (foreground) {
@@ -185,7 +179,9 @@ do_gc:
 
 			/* if return value is not zero, no victim was selected */
 			if (f2fs_gc(sbi, &gc_control)) {
-				wait_ms = gc_th->no_gc_sleep_time;
+				/* don't bother wait_ms by foreground gc */
+				if (!foreground)
+					wait_ms = gc_th->no_gc_sleep_time;
 				break;
 			}
 
