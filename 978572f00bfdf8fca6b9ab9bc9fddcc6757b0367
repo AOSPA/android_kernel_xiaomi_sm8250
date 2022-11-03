@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42963f32_6030fadc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000579
+      },
+      "writtenOn": "2022-11-03T12:38:25Z",
+      "side": 1,
+      "message": "11-03 17:32:18.619   921   921 E WifiHAL : get_wifi_interface_info: QCA_WLAN_VENDOR_ATTR_LL_STATS_IFACE_INFO_TS_DUTY_CYCLE not found\n11-03 17:32:18.619   921   921 E WifiHAL : nl80211: requestResponse-\u003enl_recvmsgs failed: -5",
+      "revId": "978572f00bfdf8fca6b9ab9bc9fddcc6757b0367",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad"
+    }
+  ]
+}
