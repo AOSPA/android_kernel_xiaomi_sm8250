@@ -130,8 +130,8 @@ struct fpc1020_data {
 	bool fb_black;
 	bool wait_finger_down;
 	struct work_struct work;
-        struct input_handler input_handler;
 #endif
+	struct input_handler input_handler;
 };
 
 static int input_connect(struct input_handler *handler,
