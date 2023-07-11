@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78128c37_7fb0b6e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000579
+      },
+      "writtenOn": "2023-07-11T01:40:45Z",
+      "side": 1,
+      "message": "you can use this to your advantage and setup hbm properly",
+      "revId": "0d8030630268003bd9fe1a3779ab0b398c183453",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad"
+    }
+  ]
+}
