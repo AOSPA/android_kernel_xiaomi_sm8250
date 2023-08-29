@@ -20319,6 +20319,7 @@ static int __wlan_hdd_cfg80211_join_ibss(struct wiphy *wiphy,
 	mac_handle_t mac_handle;
 	struct wlan_mlme_ibss_cfg ibss_cfg = {0};
 	uint8_t conn_info_channel;
+        uint32_t ch_freq_hint = 0;
 
 	hdd_enter();
 
@@ -20476,7 +20477,8 @@ static int __wlan_hdd_cfg80211_join_ibss(struct wiphy *wiphy,
 						 params->ssid_len,
 						 bssid.bytes, NULL,
 						 conn_info_channel,
-						 params->chandef.width);
+						 params->chandef.width,
+                                                 ch_freq_hint);
 
 	if (0 > status) {
 		hdd_err("connect failed");
