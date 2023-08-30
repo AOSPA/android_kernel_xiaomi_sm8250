@@ -744,6 +744,8 @@ CONFIG_BUILD_ARM64_DT_OVERLAY=y
 # Enable block device writeback throttling
 CONFIG_BLK_WBT=y
 CONFIG_BLK_WBT_SQ=y
+# Enable F2FS Compression
+CONFIG_F2FS_FS_COMPRESSION=y
 # FileSystem
 CONFIG_EXFAT_FS=y
 CONFIG_NTFS_FS=y
