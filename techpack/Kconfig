@@ -2,6 +2,15 @@ menu "Tech Packages"
 
 source techpack/data/Kconfig
 
+menu "Camera packages"
+
+config TECHPACK_CAMERA_XIAOMI_PSYCHE
+    bool "Xiaomi camera"
+    help
+      Xiaomi camera
+
+endmenu
+
 endmenu
 
 config OSSFOD
