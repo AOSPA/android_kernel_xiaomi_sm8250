@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "246542bd_6700a5eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000463
+      },
+      "writtenOn": "2023-09-15T04:02:46Z",
+      "side": 1,
+      "message": "The dim layer based DC dimming won\u0027t work for non FOD devices, so I should disable it for them instead.",
+      "revId": "077d51817ca2b0dd6bbc6164286330b13d555f73",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad"
+    }
+  ]
+}
