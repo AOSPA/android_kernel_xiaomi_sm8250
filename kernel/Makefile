@@ -128,8 +128,16 @@ obj-$(CONFIG_RSEQ) += rseq.o
 $(obj)/configs.o: $(obj)/config_data.h
 
 targets += config_data.gz
-ifeq ($(CONFIG_MACH_XIAOMI_MUNCH),y)
+ifeq ($(CONFIG_MACH_XIAOMI_ALIOTH),y)
+$(obj)/config_data.gz: arch/arm64/configs/vendor/alioth_stock-defconfig FORCE
+else ifeq ($(CONFIG_MACH_XIAOMI_APOLLO),y)
+$(obj)/config_data.gz: arch/arm64/configs/vendor/apollo_stock-defconfig FORCE
+else ifeq ($(CONFIG_MACH_XIAOMI_LMI),y)
+$(obj)/config_data.gz: arch/arm64/configs/vendor/lmi_stock-defconfig FORCE
+else ifeq ($(CONFIG_MACH_XIAOMI_MUNCH),y)
 $(obj)/config_data.gz: arch/arm64/configs/vendor/munch_stock-defconfig FORCE
+else ifeq ($(CONFIG_MACH_XIAOMI_PSYCHE),y)
+$(obj)/config_data.gz: arch/arm64/configs/vendor/psyche_stock-defconfig FORCE
 else
 $(obj)/config_data.gz: $(KCONFIG_CONFIG) FORCE
 endif
