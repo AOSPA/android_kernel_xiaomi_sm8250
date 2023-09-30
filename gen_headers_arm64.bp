@@ -197,7 +197,6 @@ gen_headers_out_arm64 = [
     "linux/dm-log-userspace.h",
     "linux/dm-user.h",
     "linux/dma-buf.h",
-    "linux/dn.h",
     "linux/dqblk_xfs.h",
     "linux/edd.h",
     "linux/efs_fs_sb.h",
@@ -404,7 +403,6 @@ gen_headers_out_arm64 = [
     "linux/netfilter.h",
     "linux/netfilter_arp.h",
     "linux/netfilter_bridge.h",
-    "linux/netfilter_decnet.h",
     "linux/netfilter_ipv4.h",
     "linux/netfilter_ipv6.h",
     "linux/netlink.h",
@@ -950,6 +948,8 @@ gen_headers_out_arm64 = [
     "linux/netfilter/ipset/ip_set_bitmap.h",
     "linux/netfilter/ipset/ip_set_hash.h",
     "linux/netfilter/ipset/ip_set_list.h",
+    "linux/akm09970.h",
+    "linux/drv8846.h",
 
     // From arch/arm64/include/uapi/**/*.h
 
