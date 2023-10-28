@@ -38,6 +38,20 @@ KBUILD_LINKER_STRING=$($HOME/tc/aosp-clang/bin/ld.lld --version | head -n 1 | pe
 export KBUILD_COMPILER_STRING
 export KBUILD_LINKER_STRING
 
+DEVICE=$1
+
+if [ "${DEVICE}" = "alioth" ]; then
+DEFCONFIG=vendor/alioth_defconfig
+elif [ "${DEVICE}" = "apollo" ]; then
+DEFCONFIG=vendor/apollo_defconfig
+elif [ "${DEVICE}" = "lmi" ]; then
+DEFCONFIG=vendor/lmi_defconfig
+elif [ "${DEVICE}" = "munch" ]; then
+DEFCONFIG=vendor/munch_defconfig
+elif [ "${DEVICE}" = "psyche" ]; then
+DEFCONFIG=vendor/psyche_defconfig
+fi
+
 #
 # Enviromental Variables
 #
@@ -47,7 +61,7 @@ DATE=$(date '+%Y%m%d-%H%M')
 # Set our directory
 OUT_DIR=out/
 
-VERSION="SurgeX-munch-${DATE}"
+VERSION="Uvite-${DEVICE}-${DATE}"
 
 # Export Zip name
 export ZIPNAME="${VERSION}.zip"
@@ -80,7 +94,7 @@ export LD_LIBRARY_PATH=${HOME}/tc/aosp-clang/lib64:$LD_LIBRARY_PATH
 echo "------ Starting Compilation ------"
 
 # Make defconfig
-make -j${KEBABS} ${ARGS} vendor/munch_defconfig
+make -j${KEBABS} ${ARGS} ${DEFCONFIG}
 
 # Make olddefconfig
 cd ${OUT_DIR} || exit
@@ -99,7 +113,17 @@ END=$(date +"%s")
 DIFF=$((END - START))
 zipname="$VERSION.zip"
 if [ -f "out/arch/arm64/boot/Image" ] && [ -f "out/arch/arm64/boot/dtbo.img" ] && [ -f "out/arch/arm64/boot/dtb" ]; then
-	git clone -q https://github.com/madmax7896/AnyKernel3.git -b munch
+        if [ "${DEVICE}" = "alioth" ]; then
+          git clone -q https://github.com/madmax7896/AnyKernel3.git -b alioth
+        elif [ "${DEVICE}" = "apollo" ]; then
+          git clone -q https://github.com/madmax7896/AnyKernel3.git -b apollo
+        elif [ "${DEVICE}" = "lmi" ]; then
+          git clone -q https://github.com/madmax7896/AnyKernel3.git -b lmi
+        elif [ "${DEVICE}" = "munch" ]; then
+          git clone -q https://github.com/madmax7896/AnyKernel3.git -b munch-uvite
+        else
+          git clone -q https://github.com/madmax7896/AnyKernel3.git -b psyche
+	fi
 	cp out/arch/arm64/boot/Image AnyKernel3
 	cp out/arch/arm64/boot/dtb AnyKernel3
 	cp out/arch/arm64/boot/dtbo.img AnyKernel3
