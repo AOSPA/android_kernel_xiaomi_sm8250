@@ -4328,6 +4328,9 @@ static void fts_gesture_event_handler(struct fts_ts_info *info,
 				     !info->sleep_finger) ||
 				    !info->sensor_sleep) {
 					info->fod_pressed = true;
+					info->fod_pressed_x = x;
+					info->fod_pressed_y = y;
+					tp_common_notify_fp_state();
 					input_report_key(info->input_dev,
 							 BTN_INFO, 1);
 					input_sync(info->input_dev);
@@ -4422,6 +4425,9 @@ static void fts_gesture_event_handler(struct fts_ts_info *info,
 			info->sleep_finger = 0;
 			info->fod_overlap = 0;
 			info->fod_pressed = false;
+			info->fod_pressed_x = 0;
+			info->fod_pressed_y = 0;
+			tp_common_notify_fp_state();
 			goto gesture_done;
 		}
 #endif
@@ -7957,6 +7963,22 @@ void fts_secure_remove(struct fts_ts_info *info)
 
 #endif
 
+#ifdef CONFIG_TOUCHSCREEN_COMMON
+static ssize_t fp_state_show(struct kobject *kobj,
+                             struct kobj_attribute *attr, char *buf)
+{
+	if (!fts_info)
+		return -EINVAL;
+
+	return sprintf(buf, "%d,%d,%d\n", fts_info->fod_pressed_x, fts_info->fod_pressed_y,
+		       fts_info->fod_pressed);
+}
+
+static struct tp_common_ops fp_state_ops = {
+	.show = fp_state_show,
+};
+#endif
+
 /**
  * Probe function, called when the driver it is matched with a device with the same name compatible name
  * This function allocate, initialize and define all the most important function and flow that are used by the driver to operate with the IC.
@@ -8212,6 +8234,11 @@ static int fts_probe(struct spi_device *client)
 
 #if defined(GESTURE_MODE) && defined(CONFIG_TOUCHSCREEN_COMMON)
 	tp_common_set_double_tap_ops(&double_tap_ops);
+
+	ret = tp_common_set_fp_state_ops(&fp_state_ops);
+	if (ret < 0)
+		MI_TOUCH_LOGE(1, "%s %s: Failed to create fp_state node err=%d\n",
+			tag, __func__, ret);
 #endif
 
 	spin_lock_init(&fts_int);
