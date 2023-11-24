@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6a108e6_65d32542",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000943
+      },
+      "writtenOn": "2023-11-24T18:09:23Z",
+      "side": 1,
+      "message": "mesquita@aospa.co",
+      "revId": "398d4f63d4089b7290ccc4c4234d607a519b2427",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad"
+    }
+  ]
+}
