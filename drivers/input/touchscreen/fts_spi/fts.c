@@ -6463,7 +6463,7 @@ static void fts_update_touchmode_data(void)
 	};
 	int temp_value = 0;
 	const struct fts_hw_platform_data *bdata = fts_info->board;
-	static expert_mode = false;
+	static bool expert_mode = false;
 
 	ret = wait_event_interruptible_timeout(fts_info->wait_queue,
 					       !(fts_info->irq_status ||
@@ -7356,7 +7356,7 @@ static int fts_write_charge_status(int status)
 	return res;
 }
 
-static int fts_get_charging_status()
+static int fts_get_charging_status(void)
 {
 	struct power_supply *usb_psy;
 	struct power_supply *dc_psy;
@@ -9086,7 +9086,7 @@ static int fts_probe(struct spi_device *client)
 #if defined(GESTURE_MODE) && defined(CONFIG_TOUCHSCREEN_COMMON)
 	tp_common_set_double_tap_ops(&double_tap_ops);
 
-	ret = tp_common_set_fp_state_ops(&fp_state_ops);
+	int ret = tp_common_set_fp_state_ops(&fp_state_ops);
 	if (ret < 0)
 		MI_TOUCH_LOGE(1, "%s %s: Failed to create fp_state node err=%d\n",
 			tag, __func__, ret);
