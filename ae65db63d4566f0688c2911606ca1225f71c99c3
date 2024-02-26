@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70140495_8302e030",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000101
+      },
+      "writtenOn": "2024-02-26T13:59:59Z",
+      "side": 1,
+      "message": "Thanks @mesquita@aospa.co. I will test and let you know how it goes",
+      "revId": "ae65db63d4566f0688c2911606ca1225f71c99c3",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad"
+    }
+  ]
+}
